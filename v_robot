@@ -1,17 +1,19 @@
-let x = 0
+let item = false
 basic.forever(function () {
-    if (maqueen.Ultrasonic(PingUnit.Centimeters) < 35 && maqueen.Ultrasonic(PingUnit.Centimeters) != 0) {
-        x = Math.randomRange(0, 1)
-        if (x == 0) {
-            maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 0)
-maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 300)
-basic.pause(800)
-        } else {
-            maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 0)
-maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 300)
-basic.pause(800)
-        }
-    } else {
-        maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, 300)
-    }
+    if (maqueen.sensor(PingUnit.Centimeters) < 35 && maqueen.sensor(PingUnit.Centimeters) != 0) {
+        item = Math.randomBoolean()
+        if (item == true) {
+            maqueen.MotorRun(maqueen.aMotors.M1, maqueen.Dir.CW, 255)
+            maqueen.MotorRun(maqueen.aMotors.M2, maqueen.Dir.CW, 0)
+            basic.pause(800)
+        }
+        if (item == false) {
+            maqueen.MotorRun(maqueen.aMotors.M1, maqueen.Dir.CW, 0)
+            maqueen.MotorRun(maqueen.aMotors.M2, maqueen.Dir.CW, 255)
+            basic.pause(800)
+        }
+    } else {
+        maqueen.MotorRun(maqueen.aMotors.M1, maqueen.Dir.CW, 255)
+        maqueen.MotorRun(maqueen.aMotors.M2, maqueen.Dir.CW, 255)
+    }
 })
